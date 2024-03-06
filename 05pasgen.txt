@@ -1,0 +1,65 @@
+
+
+IN this part what are the major thing which we have studied 
+
+
+
+
+                                (I)
+        CALLBACK CODE WITH SOME INFO TO UNDERSTAND 
+
+SYNTAX =>    useCallback(() =>{},[dependency])
+callback and its dependency array 
+
+
+const passwordGenerator = useCallback(() => {
+    let pass = ""
+    let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+    if (numberAllowed) str += "0123456789"
+    if (charAllowed) str += "!@#$%^&*()-_+=[]{}|;:',.<>?/"
+
+    for (let i = 1; i <= length; i++) {
+      let char = Math.floor(Math.random() * str.length + 1)
+      pass  += str.charAt(char)
+
+    }
+
+    setPassword(pass)
+
+  },
+    [length, numberAllowed, charAllowed ])
+
+(1) hooks that is use call back=> It is not only responsible for running the function but also memorizing the function
+and optimize them put it in casche as pee above example any change in password, number or character in function put it in cache and optimize it.
+Overall in call back it optimize the method of the dependency which we give and as we change things the method into it start optimizing
+
+
+                         (II)
+        Useeffect CODE WITH SOME INFO TO UNDERSTAND 
+
+SYNTAX =>    useEffect(() =>{},[dependency])
+
+
+ useEffect(()=>{
+    passwordGenerator()
+  },[length, numberAllowed, 
+  charAllowed, passwordGenerator])
+
+
+(2)syntax of useeffect is also similar to call back but both have much of difference between them  in this if any maniulation is done in array dependency it just run again.
+
+
+                        (III)
+        UseRef CODE WITH SOME INFO TO UNDERSTAND 
+   
+   const copyPasswordToClipboard = useCallback(() =>{
+    passwordRef.current?.select()
+    passwordRef.current?.setSelectionRange(0,100) --for more optimization
+    window.navigator.clipboard.writeText(password)
+  },
+  [password])
+  
+
+      passwordRef.current?.select()
+      useRef()
+  here this hook is used to add effect and can be used efficiently 
